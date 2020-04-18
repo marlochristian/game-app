@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <style type="text/css">
+        .logo {
+            width: 5%
+        }
+
+        .detail {
+            width: 95%;
+            padding-left: 25px;
+        }
+
+        .detail td {
+            font-size: 24px;
+        }
+
+        .body {
+            background-color: dimgrey;
+        }
+        .p{
+            color: red;
+        }
+    </style>
+
+<body class="body">
+    <h:form id="form">
+        <p:repeat value="#{allGames.games}" var="games">
+            <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                <p:graphicImage library="images" name="#{games.name.toLowerCase()}.jpg"/>
+
+                <p:outputPanel>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Title:"/>
+                        <h:outputText value="#{games.name}" style="font-weight: bold"/>
+                        <h:outputText value="Year:"/>
+                        <h:outputText value="#{games.year}" style="font-weight: bold"/>
+                        <h:outputText value="Genre:"/>
+                        <h:outputText value="#{games.genre}" style="font-weight: bold"/>
+                        <h:outputText value="Company:"/>
+                        <h:outputText value="#{games.company}" style="font-weight: bold"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+                <p:commandButton value="Update game" action="#{allGames.redirectToEditGame}"
+                                 style="margin-right:20px;">
+                    <f:actionListener binding="#{editGames.populateView(games.id)}" />
+                </p:commandButton>
+                <p:commandButton value="Delete game" action="#{allGames.deleteGame(games.id)}"
+                                 style="margin-right:20px;"/>
+            </h:panelGrid>
+            <hr/>
+        </p:repeat>
+        <p class="p">Click here to add games!</p>
+        <p:commandButton value="Add Game" action="#{allGames.redirectToEditGame}" style="margin-right:20px;"/>
+    </h:form>
+</body>
+</h:body>
+</html>

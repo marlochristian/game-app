@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:panel id="panel" header="Add Game">
+
+            <p:messages id="msgs" />
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="name" value="Title:" />
+                <p:inputText id="name" value="#{editGames.name}" required="true" label="name">
+                    <f:validator validatorId="gamesValidator" />
+                    <p:ajax update="name" event="keyup" />
+                </p:inputText>
+                <p:message for="name" id="msgname" display="icon" />
+
+                <p:outputLabel for="year" value="Year:" />
+                <p:inputText id="year" value="#{editGames.year}" label="number" required="true">
+                    <f:validateDoubleRange minimum="2000" maximum="2020" />
+                    <p:ajax update="msgyear" event="keyup" />
+                </p:inputText>
+                <p:message for="year" id="msgyear" display="icon" />
+
+                <p:outputLabel for="company" value="Company:" />
+                <p:inputText id="company" value="#{editGames.company}" required="true" label="company">
+                    <f:validateLength minimum="5" />
+                    <f:validator validatorId="companyValidator" />
+                    <p:ajax update="company" event="keyup" />
+                </p:inputText>
+                <p:message for="company" id="msgcompany" display="icon" />
+
+                <p:outputLabel for="Genre" value="Genre:" />
+                <p:inputText id="Genre" value="#{editGames.genre}" required="true" label="genre">
+                    <f:validateLength minimum="3" />
+                    <p:ajax update="Genre" event="keyup" />
+                </p:inputText>
+                <p:message for="Genre" id="msggenre" display="icon" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Save" update="panel" action="#{editGames.save}" icon="pi pi-check" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
